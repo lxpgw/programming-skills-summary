@@ -348,5 +348,143 @@ $(this).height(mainheight);
 }); 
 ```
 
-----
+###  jQuery全选/反选功能实例
+```javascript
+            $("#CheckAll").click(function(){
+                $("[name=items]:checkbox").attr("checked", true);
+            })
+            $("#CheckNo").click(function(){
+                $("[name=items]:checkbox").attr("checked", false);
+            })
+            $("#CheckRev").click(function(){
+                $("[name=items]:checkbox").each(function(){
+                    //$(this).attr("checked", !$(this).attr("checked"));
+                    this.checked = !this.checked;
+                })
+            })
+            $("#send").click(function(){
+                var str="你选中的是：\r\n";
+                $("[name=items]:checkbox:checked").each(function(){
+                    str += $(this).val()+"\r\n";
+                })
+                alert(str);
+            })
+```
+
+---
+
+### 禁止右键
+```javascript
+$(document).ready(function() {
+    //catch the right-click context menu
+    $(document).bind("contextmenu",function(e) {                
+        //warning prompt - optional
+        alert("No right-clicking!");
+ 
+        //delete the default context menu
+        return false;
+    });
+});
+```
+
+### 文本缩放
+```javascript
+$(document).ready(function() {
+    //find the current font size
+    var originalFontSize = $('html').css('font-size');
+ 
+    //Increase the text size
+    $(".increaseFont").click(function() {
+        var currentFontSize = $('html').css('font-size');
+        var currentFontSizeNumber = parseFloat(currentFontSize, 10);
+ 
+        var newFontSize = currentFontSizeNumber*1.2;
+        $('html').css('font-size', newFontSize);
+        return false;
+    });
+ 
+    //Decrease the Text Size
+    $(".decreaseFont").click(function() {
+        var currentFontSize = $('html').css('font-size');
+        var currentFontSizeNum = parseFloat(currentFontSize, 10);
+ 
+        var newFontSize = currentFontSizeNum*0.8;
+        $('html').css('font-size', newFontSize);
+        return false;
+    });
+ 
+    // Reset Font Size
+    $(".resetFont").click(function(){
+    $('html').css('font-size', originalFontSize);
+  });
+});
+```
+
+### 在新窗口打开链接
+```javascript
+$(document).ready(function() {
+    //select all anchor tags that have http in the href
+    //and apply the target=_blank
+    $("a[href^='http']").attr('target','_blank');
+});
+```
+
+### 样式表切换
+```javascript
+$(document).ready(function() {
+    $("a.cssSwap").click(function() {
+        //swap the link rel attribute with the value in the rel   
+        $('link[rel=stylesheet]').attr('href' , $(this).attr('rel'));
+    });
+});
+```
+
+### 回到顶部
+```javascript
+$(document).ready(function() {
+    //when the id="top" link is clicked
+    $('#top').click(function() {
+        //scoll the page back to the top
+        $(document).scrollTo(0,500);
+    }
+});
+```
+
+### 获取鼠标的 X、Y 坐标
+```javascript
+$().mousemove(function(e){
+    //display the x and y axis values inside the P element
+    $('p').html("X Axis : " + e.pageX + " | Y Axis " + e.pageY);
+});
+```
+
+### 检测当前鼠标的坐标
+```javascript
+$(document).ready(function() {
+    $().mousemove(function(e){
+    $('# MouseCoordinates ').html("X Axis Position = " + e.pageX + " and Y Axis Position = " + e.pageY);
+});
+```
+
+### 预加载图片
+```javascript
+jQuery.preloadImagesInWebPage = function() {
+    for(var ctr = 0; ctr<arguments.length; ctr++){
+        jQuery("").attr("src", arguments[ctr]);
+    }
+}
+
+// 调用方法：
+$.preloadImages("image1.gif", "image2.gif", "image3.gif");
+// 判断图片是否已加载：
+$('#imageObject').attr('src', 'image1.gif').load(function() {
+    alert('The image has been loaded…');
+});
+```
+
+> from:(http://www.cnblogs.com/lhb25/p/useful-jquery-tips-and-tricks.html)
+
+---
+
+
 
